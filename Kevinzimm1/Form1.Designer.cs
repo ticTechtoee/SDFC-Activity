@@ -57,6 +57,7 @@
             this.BtnLoadFile.TabIndex = 0;
             this.BtnLoadFile.Text = "Load File";
             this.BtnLoadFile.UseVisualStyleBackColor = true;
+            this.BtnLoadFile.Click += new System.EventHandler(this.BtnLoadFile_Click);
             // 
             // label1
             // 
