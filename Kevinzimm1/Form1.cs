@@ -2,11 +2,15 @@
 using System.Data.OleDb;
 using System.Data;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Kevinzimm1
 {
     public partial class sdfcactivityFrm : Form
     {
+        private const string filePath = @"D:\Development\Kevinzimm1\Requirements\newfile.xlsx";
+        private static readonly object fileLock = new object();
+
         public sdfcactivityFrm()
         {
             InitializeComponent();
@@ -14,46 +18,53 @@ namespace Kevinzimm1
 
         private void BtnLoadFile_Click(object sender, EventArgs e)
         {
-            string filePath = @"D:\Development\Kevinzimm1\Requirements\Activity Tracker Project VB.xlsx";
-            string sheetName = "staff";
+           
+        }
 
-            // Connection string for Excel files
-            string connectionString = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={filePath};Extended Properties='Excel 12.0 Xml;HDR=YES';";
-
-            // SQL query to select data from the specified sheet
-            string query = $"SELECT * FROM [{sheetName}$]";
-
-            // Create an OleDbConnection and OleDbCommand
-            using (OleDbConnection connection = new OleDbConnection(connectionString))
-            using (OleDbCommand command = new OleDbCommand(query, connection))
+        private void BtnOk_Click(object sender, EventArgs e)
+        {
+            try
             {
-                try
+                // Use a lock to ensure mutual exclusion
+                lock (fileLock)
                 {
-                    connection.Open();
+                    // Read the content of the Excel file
+                    string fileContent = File.ReadAllText(filePath);
 
-                    // Use OleDbDataAdapter to fill a DataTable
-                    using (OleDbDataAdapter adapter = new OleDbDataAdapter(command))
-                    {
-                        DataTable dataTable = new DataTable();
-                        adapter.Fill(dataTable);
-
-                        // Display the data
-                        foreach (DataRow row in dataTable.Rows)
-                        {
-                            foreach (var item in row.ItemArray)
-                            {
-                                
-                                txtSbj.Text += item;
-                            }
-                            Console.WriteLine();
-                        }
-                    }
+                    // Process and display the read content as needed
+                    MessageBox.Show("Read content:\n" + fileContent);
                 }
-                catch (Exception ex)
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error reading file: " + ex.Message);
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtnClose_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Use a lock to ensure mutual exclusion
+                lock (fileLock)
                 {
-                    MessageBox.Show($"Error: {ex.Message}");
-                    
+                    // Get the updated content (you can replace this with your logic)
+                    string updatedContent = "Updated content goes here";
+
+                    // Write the updated content to the Excel file
+                    File.WriteAllText(filePath, updatedContent);
+
+                    MessageBox.Show("File updated successfully.");
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error writing to file: " + ex.Message);
             }
         }
     }

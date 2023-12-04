@@ -30,23 +30,25 @@
         {
             this.BtnLoadFile = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.CmbBoxOppNm = new System.Windows.Forms.ComboBox();
+            this.CmbBoxStaffName = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.CmbCategory = new System.Windows.Forms.ComboBox();
-            this.CmbActivity = new System.Windows.Forms.ComboBox();
+            this.CustomtimePicker = new System.Windows.Forms.DateTimePicker();
+            this.CmbActivities = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtSbj = new System.Windows.Forms.RichTextBox();
             this.txtDesc = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.chkDemo = new System.Windows.Forms.CheckBox();
-            this.chkEnt = new System.Windows.Forms.CheckBox();
             this.BtnOk = new System.Windows.Forms.Button();
             this.BtnClose = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.LblNULL = new System.Windows.Forms.Label();
+            this.txtStaffCode = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtMinutesEntry = new System.Windows.Forms.TextBox();
+            this.txtNumericInput = new System.Windows.Forms.TextBox();
+            this.CustomdatePicker = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // BtnLoadFile
@@ -64,51 +66,46 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 58);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 13);
+            this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Opportunity Name";
+            this.label1.Text = "Staff Code";
             // 
-            // CmbBoxOppNm
+            // CmbBoxStaffName
             // 
-            this.CmbBoxOppNm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.CmbBoxOppNm.FormattingEnabled = true;
-            this.CmbBoxOppNm.Location = new System.Drawing.Point(15, 84);
-            this.CmbBoxOppNm.Name = "CmbBoxOppNm";
-            this.CmbBoxOppNm.Size = new System.Drawing.Size(364, 21);
-            this.CmbBoxOppNm.TabIndex = 2;
+            this.CmbBoxStaffName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.CmbBoxStaffName.FormattingEnabled = true;
+            this.CmbBoxStaffName.Location = new System.Drawing.Point(185, 84);
+            this.CmbBoxStaffName.Name = "CmbBoxStaffName";
+            this.CmbBoxStaffName.Size = new System.Drawing.Size(194, 21);
+            this.CmbBoxStaffName.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 131);
+            this.label2.Location = new System.Drawing.Point(182, 134);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Date";
+            this.label2.Text = "Time";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // dateTimePicker
+            // CustomtimePicker
             // 
-            this.dateTimePicker.Location = new System.Drawing.Point(14, 149);
-            this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(364, 20);
-            this.dateTimePicker.TabIndex = 4;
+            this.CustomtimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.CustomtimePicker.Location = new System.Drawing.Point(185, 150);
+            this.CustomtimePicker.Name = "CustomtimePicker";
+            this.CustomtimePicker.ShowUpDown = true;
+            this.CustomtimePicker.Size = new System.Drawing.Size(195, 20);
+            this.CustomtimePicker.TabIndex = 3;
             // 
-            // CmbCategory
+            // CmbActivities
             // 
-            this.CmbCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.CmbCategory.FormattingEnabled = true;
-            this.CmbCategory.Location = new System.Drawing.Point(16, 209);
-            this.CmbCategory.Name = "CmbCategory";
-            this.CmbCategory.Size = new System.Drawing.Size(364, 21);
-            this.CmbCategory.TabIndex = 5;
-            // 
-            // CmbActivity
-            // 
-            this.CmbActivity.FormattingEnabled = true;
-            this.CmbActivity.Location = new System.Drawing.Point(16, 269);
-            this.CmbActivity.Name = "CmbActivity";
-            this.CmbActivity.Size = new System.Drawing.Size(364, 21);
-            this.CmbActivity.TabIndex = 6;
+            this.CmbActivities.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.CmbActivities.FormattingEnabled = true;
+            this.CmbActivities.Location = new System.Drawing.Point(16, 209);
+            this.CmbActivities.Name = "CmbActivities";
+            this.CmbActivities.Size = new System.Drawing.Size(364, 21);
+            this.CmbActivities.TabIndex = 4;
             // 
             // label3
             // 
@@ -117,93 +114,68 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Category";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 253);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Activity";
+            this.label3.Text = "Activities";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 314);
+            this.label5.Location = new System.Drawing.Point(12, 264);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.Size = new System.Drawing.Size(44, 13);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Subject";
-            // 
-            // txtSbj
-            // 
-            this.txtSbj.Location = new System.Drawing.Point(13, 331);
-            this.txtSbj.Name = "txtSbj";
-            this.txtSbj.Size = new System.Drawing.Size(367, 96);
-            this.txtSbj.TabIndex = 10;
-            this.txtSbj.Text = "";
+            this.label5.Text = "Minutes";
             // 
             // txtDesc
             // 
-            this.txtDesc.Location = new System.Drawing.Point(12, 459);
+            this.txtDesc.Location = new System.Drawing.Point(16, 336);
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Size = new System.Drawing.Size(367, 96);
-            this.txtDesc.TabIndex = 12;
+            this.txtDesc.TabIndex = 7;
             this.txtDesc.Text = "";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 442);
+            this.label6.Location = new System.Drawing.Point(13, 320);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(60, 13);
+            this.label6.Size = new System.Drawing.Size(30, 13);
             this.label6.TabIndex = 11;
-            this.label6.Text = "Description";
+            this.label6.Text = "Note";
             // 
             // chkDemo
             // 
             this.chkDemo.AutoSize = true;
-            this.chkDemo.Location = new System.Drawing.Point(93, 578);
+            this.chkDemo.Location = new System.Drawing.Point(117, 478);
             this.chkDemo.Name = "chkDemo";
-            this.chkDemo.Size = new System.Drawing.Size(63, 17);
-            this.chkDemo.TabIndex = 13;
-            this.chkDemo.Text = "Demo ?";
+            this.chkDemo.Size = new System.Drawing.Size(150, 17);
+            this.chkDemo.TabIndex = 8;
+            this.chkDemo.Text = "Include Note in Message?";
             this.chkDemo.UseVisualStyleBackColor = true;
-            // 
-            // chkEnt
-            // 
-            this.chkEnt.AutoSize = true;
-            this.chkEnt.Location = new System.Drawing.Point(235, 578);
-            this.chkEnt.Name = "chkEnt";
-            this.chkEnt.Size = new System.Drawing.Size(51, 17);
-            this.chkEnt.TabIndex = 14;
-            this.chkEnt.Text = "Ent ?";
-            this.chkEnt.UseVisualStyleBackColor = true;
             // 
             // BtnOk
             // 
-            this.BtnOk.Location = new System.Drawing.Point(16, 627);
+            this.BtnOk.Location = new System.Drawing.Point(15, 527);
             this.BtnOk.Name = "BtnOk";
             this.BtnOk.Size = new System.Drawing.Size(166, 33);
-            this.BtnOk.TabIndex = 15;
+            this.BtnOk.TabIndex = 9;
             this.BtnOk.Text = "OK";
             this.BtnOk.UseVisualStyleBackColor = true;
+            this.BtnOk.Click += new System.EventHandler(this.BtnOk_Click);
             // 
             // BtnClose
             // 
-            this.BtnClose.Location = new System.Drawing.Point(214, 627);
+            this.BtnClose.Location = new System.Drawing.Point(213, 527);
             this.BtnClose.Name = "BtnClose";
             this.BtnClose.Size = new System.Drawing.Size(166, 33);
-            this.BtnClose.TabIndex = 16;
+            this.BtnClose.TabIndex = 10;
             this.BtnClose.Text = "CLOSE";
             this.BtnClose.UseVisualStyleBackColor = true;
+            this.BtnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 690);
+            this.label7.Location = new System.Drawing.Point(13, 594);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(57, 13);
             this.label7.TabIndex = 17;
@@ -212,40 +184,89 @@
             // LblNULL
             // 
             this.LblNULL.AutoSize = true;
-            this.LblNULL.Location = new System.Drawing.Point(79, 690);
+            this.LblNULL.Location = new System.Drawing.Point(80, 594);
             this.LblNULL.Name = "LblNULL";
             this.LblNULL.Size = new System.Drawing.Size(35, 13);
             this.LblNULL.TabIndex = 18;
             this.LblNULL.Text = "NULL";
             // 
+            // txtStaffCode
+            // 
+            this.txtStaffCode.Location = new System.Drawing.Point(16, 84);
+            this.txtStaffCode.Name = "txtStaffCode";
+            this.txtStaffCode.Size = new System.Drawing.Size(138, 20);
+            this.txtStaffCode.TabIndex = 1;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(182, 58);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(60, 13);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "Staff Name";
+            // 
+            // txtMinutesEntry
+            // 
+            this.txtMinutesEntry.Location = new System.Drawing.Point(16, 280);
+            this.txtMinutesEntry.Name = "txtMinutesEntry";
+            this.txtMinutesEntry.Size = new System.Drawing.Size(166, 20);
+            this.txtMinutesEntry.TabIndex = 5;
+            // 
+            // txtNumericInput
+            // 
+            this.txtNumericInput.Location = new System.Drawing.Point(225, 280);
+            this.txtNumericInput.Name = "txtNumericInput";
+            this.txtNumericInput.Size = new System.Drawing.Size(154, 20);
+            this.txtNumericInput.TabIndex = 6;
+            // 
+            // CustomdatePicker
+            // 
+            this.CustomdatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.CustomdatePicker.Location = new System.Drawing.Point(16, 150);
+            this.CustomdatePicker.Name = "CustomdatePicker";
+            this.CustomdatePicker.Size = new System.Drawing.Size(138, 20);
+            this.CustomdatePicker.TabIndex = 21;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 134);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(30, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "Date";
+            // 
             // sdfcactivityFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(392, 712);
+            this.ClientSize = new System.Drawing.Size(392, 630);
+            this.Controls.Add(this.CustomdatePicker);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtNumericInput);
+            this.Controls.Add(this.txtMinutesEntry);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.txtStaffCode);
             this.Controls.Add(this.LblNULL);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.BtnClose);
             this.Controls.Add(this.BtnOk);
-            this.Controls.Add(this.chkEnt);
             this.Controls.Add(this.chkDemo);
             this.Controls.Add(this.txtDesc);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.txtSbj);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.CmbActivity);
-            this.Controls.Add(this.CmbCategory);
-            this.Controls.Add(this.dateTimePicker);
+            this.Controls.Add(this.CmbActivities);
+            this.Controls.Add(this.CustomtimePicker);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.CmbBoxOppNm);
+            this.Controls.Add(this.CmbBoxStaffName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BtnLoadFile);
             this.MaximizeBox = false;
             this.Name = "sdfcactivityFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SDFC Activity";
+            this.Text = "Activity Tracking";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,23 +276,25 @@
 
         private System.Windows.Forms.Button BtnLoadFile;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox CmbBoxOppNm;
+        private System.Windows.Forms.ComboBox CmbBoxStaffName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker;
-        private System.Windows.Forms.ComboBox CmbCategory;
-        private System.Windows.Forms.ComboBox CmbActivity;
+        private System.Windows.Forms.DateTimePicker CustomtimePicker;
+        private System.Windows.Forms.ComboBox CmbActivities;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.RichTextBox txtSbj;
         private System.Windows.Forms.RichTextBox txtDesc;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox chkDemo;
-        private System.Windows.Forms.CheckBox chkEnt;
         private System.Windows.Forms.Button BtnOk;
         private System.Windows.Forms.Button BtnClose;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label LblNULL;
+        private System.Windows.Forms.TextBox txtStaffCode;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtMinutesEntry;
+        private System.Windows.Forms.TextBox txtNumericInput;
+        private System.Windows.Forms.DateTimePicker CustomdatePicker;
+        private System.Windows.Forms.Label label4;
     }
 }
 
