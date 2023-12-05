@@ -87,7 +87,6 @@
             this.label2.Size = new System.Drawing.Size(30, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Time";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // CustomtimePicker
             // 
@@ -196,6 +195,7 @@
             this.txtStaffCode.Name = "txtStaffCode";
             this.txtStaffCode.Size = new System.Drawing.Size(138, 20);
             this.txtStaffCode.TabIndex = 1;
+            this.txtStaffCode.TextChanged += new System.EventHandler(this.txtStaffCode_TextChanged);
             // 
             // label8
             // 
