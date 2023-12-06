@@ -36,9 +36,9 @@
             this.CmbActivities = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtDesc = new System.Windows.Forms.RichTextBox();
+            this.txtNote = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.chkDemo = new System.Windows.Forms.CheckBox();
+            this.chkNote = new System.Windows.Forms.CheckBox();
             this.BtnOk = new System.Windows.Forms.Button();
             this.BtnClose = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -124,13 +124,13 @@
             this.label5.TabIndex = 9;
             this.label5.Text = "Minutes";
             // 
-            // txtDesc
+            // txtNote
             // 
-            this.txtDesc.Location = new System.Drawing.Point(16, 336);
-            this.txtDesc.Name = "txtDesc";
-            this.txtDesc.Size = new System.Drawing.Size(367, 96);
-            this.txtDesc.TabIndex = 7;
-            this.txtDesc.Text = "";
+            this.txtNote.Location = new System.Drawing.Point(16, 336);
+            this.txtNote.Name = "txtNote";
+            this.txtNote.Size = new System.Drawing.Size(367, 96);
+            this.txtNote.TabIndex = 7;
+            this.txtNote.Text = "";
             // 
             // label6
             // 
@@ -141,15 +141,15 @@
             this.label6.TabIndex = 11;
             this.label6.Text = "Note";
             // 
-            // chkDemo
+            // chkNote
             // 
-            this.chkDemo.AutoSize = true;
-            this.chkDemo.Location = new System.Drawing.Point(117, 478);
-            this.chkDemo.Name = "chkDemo";
-            this.chkDemo.Size = new System.Drawing.Size(150, 17);
-            this.chkDemo.TabIndex = 8;
-            this.chkDemo.Text = "Include Note in Message?";
-            this.chkDemo.UseVisualStyleBackColor = true;
+            this.chkNote.AutoSize = true;
+            this.chkNote.Location = new System.Drawing.Point(117, 478);
+            this.chkNote.Name = "chkNote";
+            this.chkNote.Size = new System.Drawing.Size(150, 17);
+            this.chkNote.TabIndex = 8;
+            this.chkNote.Text = "Include Note in Message?";
+            this.chkNote.UseVisualStyleBackColor = true;
             // 
             // BtnOk
             // 
@@ -252,8 +252,8 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.BtnClose);
             this.Controls.Add(this.BtnOk);
-            this.Controls.Add(this.chkDemo);
-            this.Controls.Add(this.txtDesc);
+            this.Controls.Add(this.chkNote);
+            this.Controls.Add(this.txtNote);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
@@ -282,9 +282,9 @@
         private System.Windows.Forms.ComboBox CmbActivities;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.RichTextBox txtDesc;
+        private System.Windows.Forms.RichTextBox txtNote;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.CheckBox chkDemo;
+        private System.Windows.Forms.CheckBox chkNote;
         private System.Windows.Forms.Button BtnOk;
         private System.Windows.Forms.Button BtnClose;
         private System.Windows.Forms.Label label7;
