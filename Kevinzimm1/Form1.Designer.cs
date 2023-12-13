@@ -267,6 +267,7 @@
             this.Name = "sdfcactivityFrm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Activity Tracking";
+            this.Load += new System.EventHandler(this.sdfcactivityFrm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
