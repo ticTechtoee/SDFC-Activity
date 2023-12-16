@@ -18,7 +18,8 @@ namespace Kevinzimm1
         private const string sheetName1 = "Staff";
         private const string sheetName2 = "Data Fields";
 
-        private Dictionary<string, StaffData> codeToNameMap = new Dictionary<string, StaffData>();
+        private Dictionary<string, StaffData> codeToStaffDataMap = new Dictionary<string, StaffData>();
+
 
         private List<StaffData> staffDataList = new List<StaffData>();
 
@@ -48,14 +49,14 @@ namespace Kevinzimm1
 
                 filePath = selectedFilePath;
 
-                LoadStaffNames();
+                LoadStaffData();
                 LoadActivities();
             }
         }
 
         //This function will get the staff name and other details from the excel sheet i.e "Staff"
 
-        private void LoadStaffNames()
+        private void LoadStaffData()
         {
             try
             {
@@ -69,28 +70,34 @@ namespace Kevinzimm1
                     int codeColumnIndex = 1;
                     int nameColumnIndex = 2;
                     int emailColumnIndex = 3;
-                    int supernameColumnIndex = 4;
-                    int superemailColumnIndex = 5;
+                    int supervisorColumnIndex = 4;
+                    int supervisorEmailColumnIndex = 5;
+                    
 
                     for (int row = 2; row <= rowCount; row++)
                     {
                         string code = worksheet.Cells[row, codeColumnIndex].Text;
                         string name = worksheet.Cells[row, nameColumnIndex].Text;
                         string email = worksheet.Cells[row, emailColumnIndex].Text;
-                        string supervisorname = worksheet.Cells[row, supernameColumnIndex].Text;
-                        string supervisoremail = worksheet.Cells[row, superemailColumnIndex].Text;
+                        string supervisor = worksheet.Cells[row, supervisorColumnIndex].Text;
+                        string supervisorEmail = worksheet.Cells[row, supervisorEmailColumnIndex].Text;
+                        
 
                         StaffData staffData = new StaffData
                         {
                             Code = code,
                             Name = name,
                             Email = email,
-                            Supervisor = supervisorname,
-                            SupervisorEmail = supervisoremail,
+                            Supervisor = supervisor,
+                            SupervisorEmail = supervisorEmail,
+                            
                         };
 
-                        staffDataList.Add(staffData);
-                        codeToNameMap[code] = staffData;
+                        // Populate the dictionary with code-to-staff data mapping
+                        codeToStaffDataMap[code] = staffData;
+
+                        // Populate the dropdown with staff names
+                        CmbBoxStaffName.Items.Add(staffData);
                     }
                 }
             }
@@ -99,6 +106,34 @@ namespace Kevinzimm1
                 MessageBox.Show($"Error reading file: {ex.Message}");
             }
         }
+
+
+        private void txtStaffCode_TextChanged(object sender, EventArgs e)
+        {
+            // Find the corresponding staff data based on the entered code
+            string enteredCode = txtStaffCode.Text.ToUpper().Trim();
+
+            if (codeToStaffDataMap.TryGetValue(enteredCode, out StaffData selectedStaff))
+            {
+                // Access other relevant fields
+                //string email = selectedStaff.Email;
+                //string supervisor = selectedStaff.Supervisor;
+                //string supervirsorEmail = selectedStaff.SupervisorEmail;
+                CmbBoxStaffName.Text = selectedStaff.Name;
+                Associate_Name = selectedStaff.Name;
+
+                Associate_Email = selectedStaff.Email;
+                Supervisor_Name = selectedStaff.Supervisor;
+                Supervisor_Email = selectedStaff.SupervisorEmail;
+            }
+            else
+            {
+                CmbBoxStaffName.SelectedIndex = -1; // No match found, clear selection
+            }
+
+        }
+
+
         // Creating a seperate method to get the Activities list from the "Data Fields"
         private void LoadActivities()
         {
@@ -151,9 +186,15 @@ namespace Kevinzimm1
                     worksheet.Cells[newRow, 6].Value = date.ToShortDateString();
                     worksheet.Cells[newRow, 7].Value = time.ToShortTimeString();
                     worksheet.Cells[newRow, 8].Value = activity;
-                    worksheet.Cells[newRow, 9].Value = length;
-                    worksheet.Cells[newRow, 10].Value = note;
-                    worksheet.Cells[newRow, 11].Value = sendNote ? "Yes" : "No";
+                    // New Fields to Include
+                    worksheet.Cells[newRow, 9].Value = associateName;
+                    worksheet.Cells[newRow, 10].Value = associateEmail;
+                    worksheet.Cells[newRow, 11].Value = supervisorName;
+                    worksheet.Cells[newRow, 12].Value = supervisorEmail;
+                    // Old Fields
+                    worksheet.Cells[newRow, 13].Value = length;
+                    worksheet.Cells[newRow, 14].Value = note;
+                    worksheet.Cells[newRow, 15].Value = sendNote ? "Yes" : "No";
 
                     package.Save();
                 }
@@ -167,15 +208,24 @@ namespace Kevinzimm1
 
         private void BtnOk_Click(object sender, EventArgs e)
         {
+            try
+            {
+                WriteEventDataToExcel(txtStaffCode.Text.ToUpper(), CmbBoxStaffName.Text, Associate_Email, Supervisor_Name, Supervisor_Email, CustomdatePicker.Value, CustomtimePicker.Value, CmbActivities.Text, (txtMinutesEntry.Text + " " + txtNumericInput.Text), txtNote.Text);
 
-            WriteEventDataToExcel(txtStaffCode.Text.ToUpper(), Associate_Name, Associate_Email, Supervisor_Name, Supervisor_Email, CustomdatePicker.Value, CustomtimePicker.Value, CmbActivities.Text, (txtMinutesEntry.Text + " " + txtNumericInput.Text), txtNote.Text);
-            LblNULL.Text = Associate_Name + " " + CmbActivities.Text;
-            Settings.Default.Username = Associate_Name;
-            Settings.Default.Last_Entry = CmbActivities.Text;
-            Settings.Default.Save();
+                // Set the value for LblNULL after successful data writing
+                LblNULL.Text = Associate_Name + " " + CmbActivities.Text;
 
+                Settings.Default.Username = Associate_Name;
+                Settings.Default.Last_Entry = CmbActivities.Text;
+                Settings.Default.Save();
 
-            MessageBox.Show("Data has been appended", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Data has been appended", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Stop", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
         private void BtnClose_Click(object sender, EventArgs e)
         {
@@ -183,30 +233,28 @@ namespace Kevinzimm1
         }
 
 
-        private void txtStaffCode_TextChanged(object sender, EventArgs e)
-        {
-            // Find the corresponding staff data based on the entered code
-            // Will convert lowercase code into uppercase
-            string enteredCode = txtStaffCode.Text.Trim().ToUpper();
-
-            if (codeToNameMap.TryGetValue(enteredCode, out StaffData selectedStaff))
-            {
-                CmbBoxStaffName.Text = selectedStaff.Name;
-                Associate_Name = CmbBoxStaffName.Text;
-                Associate_Email = selectedStaff.Email;
-                Supervisor_Name = selectedStaff.Supervisor;
-                Supervisor_Email = selectedStaff.SupervisorEmail;
-            }
-            else
-            {
-                CmbBoxStaffName.SelectedIndex = -1; // No match found, clear selection
-            }
-
-        }
+       
 
         private void sdfcactivityFrm_Load(object sender, EventArgs e)
         {
             LblNULL.Text = Settings.Default.Username + " " + Settings.Default.Last_Entry;
+        }
+
+        private void CmbBoxStaffName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Access selected staff data when ComboBox selection changes
+            if (CmbBoxStaffName.SelectedItem is StaffData selectedStaff)
+            {
+                //string code = selectedStaff.Code;
+                //string name = selectedStaff.Name;
+                //string email = selectedStaff.Email;
+                //string supervisor = selectedStaff.Supervisor;
+
+                Associate_Name = selectedStaff.Name;
+                Associate_Email = selectedStaff.Email;
+                Supervisor_Name = selectedStaff.Supervisor;
+                Supervisor_Email = selectedStaff.SupervisorEmail;
+            }
         }
     }
 
@@ -217,6 +265,13 @@ namespace Kevinzimm1
         public string Email { get; set; }
         public string Supervisor { get; set; }
         public string SupervisorEmail { get; set; }
+        
 
+        // Override ToString to display the name in the ComboBox
+        public override string ToString()
+        {
+            return Name;
+        }
     }
+
 }

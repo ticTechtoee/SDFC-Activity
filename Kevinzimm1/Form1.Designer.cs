@@ -78,6 +78,7 @@
             this.CmbBoxStaffName.Name = "CmbBoxStaffName";
             this.CmbBoxStaffName.Size = new System.Drawing.Size(194, 21);
             this.CmbBoxStaffName.TabIndex = 2;
+            this.CmbBoxStaffName.SelectedIndexChanged += new System.EventHandler(this.CmbBoxStaffName_SelectedIndexChanged);
             // 
             // label2
             // 
